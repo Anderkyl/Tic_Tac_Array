@@ -15,30 +15,65 @@ let winningCombos = [
 
 ];
 
-letCheckWin = function(){
+let checkWin = function(){
     let matchCount = 0;
+    for(let i = 0; i , winningCombos.length; i++){
 
-    for(let i = 0; i < winningCombos.length; i++){
         for(let j = 0; j < winningCombos[0].length; j++){
-            if(player)
-        }
+            if(playerToken === "X"){
+                if(playerXChoices.includes(winningCombos[i][j])){
+                    matchCount++;
+                }
+                if(matchCount === 3){
+                    document.getElementById("winner").innerText = "Player X Wins!";
+                }
+            }
 
+            if(playerToken === "O"){
+
+                if(playerOChoices.includes(winningCombos[i][j])){
+                    matchCount++;
+                }
+                if(matchCount === 3){
+                    document.getElementById("winner").innerText = "Player O Wins!";
+                }
+            }
+        }
+        matchCount = 0;
     }
 
 };
 
 let playerTurn = function(id){
 
-    id.innerText = playerToken;
+    element.innerText = playerToken;
+
+    if(playerToken === "X"){
+        playerXChoices.push(parseInt(element.id));
+        checkWin();
+        playerToken = "O";
+        element.onclick = "";
+
+
+    }else{
+
+        playerOChoices.push(parseInt(element.id));
+        checkWin();
+        playerToken = "X";
+        element.onclick = "";
+
+    }
 
 
 };
 
 let setUpBoard = function(){
     //Tie the functions to the boxes
-    let testClick = document.getElementById("1");
+    let boxes = document.getElementsByClassName("box");
 
-    testClick.onclick = function(){playerTurn(this)};
-
+    for(let i = 0; i < boxes.length; i++){
+        boxes[i].innerText = "";
+        boxes[i].onclick = function(){playerTurn(this)};
+    }
 
 };
